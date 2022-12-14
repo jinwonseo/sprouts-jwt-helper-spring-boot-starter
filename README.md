@@ -11,7 +11,7 @@ sprouts-jwt-creator-spring-boot-starter 또는 sprouts-jwt-parser-spring-boot-st
     <dependency>
         <groupId>kr.sprouts.autoconfigure</groupId>
         <artifactId>sprouts-jwt-helper-spring-boot-starter</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </dependency>
 </dependencies>
 ```
