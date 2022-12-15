@@ -4,12 +4,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.security.KeyPair;
 import java.util.Base64;
 
 public class JwtHelper {
-    public static Key secretKeyFor(SignatureAlgorithm signatureAlgorithm) {
+    public static SecretKey secretKeyFor(SignatureAlgorithm signatureAlgorithm) {
         return Keys.secretKeyFor(signatureAlgorithm);
     }
 
@@ -25,7 +25,7 @@ public class JwtHelper {
         return Base64UrlEncodedSecretPair.of(Keys.keyPairFor(signatureAlgorithm));
     }
 
-    public static Key convertToKey(String base64UrlEncodedSecret) {
+    public static SecretKey convertToSecretKey(String base64UrlEncodedSecret) {
         return Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(Base64.getUrlEncoder().encodeToString(base64UrlEncodedSecret.getBytes())));
     }
 }
