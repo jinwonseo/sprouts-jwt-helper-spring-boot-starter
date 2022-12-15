@@ -15,38 +15,28 @@ class JwtHelperTest {
             = new ApplicationContextRunner().withConfiguration(AutoConfigurations.of(JwtHelperConfiguration.class));
     @Test
     void secret_key_for() {
-        this.applicationContextRunner.run(context -> {
-            assertThat(JwtHelper.secretKeyFor(SignatureAlgorithm.HS512)).isNotNull();
-        });
+        this.applicationContextRunner.run(context -> assertThat(JwtHelper.secretKeyFor(SignatureAlgorithm.HS512)).isNotNull());
     }
 
     @Test
     void secret_key_not_supported_alg() {
-        assertThatThrownBy(() -> {
-            this.applicationContextRunner.run(context -> JwtHelper.secretKeyFor(SignatureAlgorithm.RS256));
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> this.applicationContextRunner.run(context -> JwtHelper.secretKeyFor(SignatureAlgorithm.RS256))).isInstanceOf(IllegalArgumentException.class);
     }
 
 
     @Test
     void key_pair_for() {
-        this.applicationContextRunner.run(context -> {
-            assertThat(JwtHelper.keyPairFor(SignatureAlgorithm.RS256)).isNotNull();
-        });
+        this.applicationContextRunner.run(context -> assertThat(JwtHelper.keyPairFor(SignatureAlgorithm.RS256)).isNotNull());
     }
 
     @Test
     void key_pair_not_supported_alg() {
-        assertThatThrownBy(() -> {
-            this.applicationContextRunner.run(context -> JwtHelper.keyPairFor(SignatureAlgorithm.HS512));
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> this.applicationContextRunner.run(context -> JwtHelper.keyPairFor(SignatureAlgorithm.HS512))).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void base64url_encoded_secret_key_for() {
-        this.applicationContextRunner.run(context -> {
-            assertThat(Decoders.BASE64URL.decode(JwtHelper.base64urlEncodedSecretKeyFor(SignatureAlgorithm.HS512).getValue())).isNotNull();
-        });
+        this.applicationContextRunner.run(context -> assertThat(Decoders.BASE64URL.decode(JwtHelper.base64urlEncodedSecretKeyFor(SignatureAlgorithm.HS512).getValue())).isNotNull());
     }
 
     @Test
@@ -55,5 +45,10 @@ class JwtHelperTest {
             assertThat(Decoders.BASE64URL.decode(JwtHelper.base64UrlEncodedKeyPairFor(SignatureAlgorithm.RS512).getPrivateKey().getValue())).isNotNull();
             assertThat(Decoders.BASE64URL.decode(JwtHelper.base64UrlEncodedKeyPairFor(SignatureAlgorithm.RS512).getPublicKey().getValue())).isNotNull();
         });
+    }
+
+    @Test
+    void convert_to_key() {
+        this.applicationContextRunner.run(context -> assertThat(JwtHelper.convertToKey(JwtHelper.base64urlEncodedSecretKeyFor(SignatureAlgorithm.HS512).getValue())).isNotNull());
     }
 }
