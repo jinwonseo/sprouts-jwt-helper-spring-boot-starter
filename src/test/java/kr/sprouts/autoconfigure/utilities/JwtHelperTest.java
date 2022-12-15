@@ -42,6 +42,6 @@ class JwtHelperTest {
 
     @Test
     void convert_to_key() {
-        assertThat(JwtHelper.convertToKey(JwtHelper.base64urlEncodedSecretKeyFor(SignatureAlgorithm.HS512).value())).isNotNull();
+        assertThat(JwtHelper.convertToSecretKey(JwtHelper.base64urlEncodedSecretKeyFor(SignatureAlgorithm.HS512).value())).isNotNull();
     }
 }
