@@ -17,5 +17,5 @@ sprouts-jwt-creator-spring-boot-starter 또는 sprouts-jwt-parser-spring-boot-st
 ```
 
 ## Related dependencies
-> * [log4j](https://logging.apache.org/log4j/2.x/)
-> * [Java JWT](https://github.com/jwtk/jjwt)
+* [log4j](https://logging.apache.org/log4j/2.x/)
+* [Java JWT](https://github.com/jwtk/jjwt)
